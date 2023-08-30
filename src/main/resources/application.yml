@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /challenge
+
+interconnected.flights:
+  max-stop: 1
+  minimum-time-between-connections-minutes: 120
+
+
+ryanair.url: https://services-api.ryanair.com

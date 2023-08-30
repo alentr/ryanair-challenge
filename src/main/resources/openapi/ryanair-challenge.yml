@@ -1,0 +1,133 @@
+openapi: 3.0.2
+info:
+  title: Ryanair Challenge
+  version: 1.0.0
+  description: API for ryanair challenge
+  contact:
+    name: Alexandre Telles
+    url: 'https://www.linkedin.com/in/telles-alexandre/'
+    email: alexandre.ntr@gmail.com
+servers:
+  - url: 'http://localhost:8080/challenge'
+    description: localhost
+paths:
+  /interconnections:
+    description: "Return a list of flights departing from a given departure airport not earlier than\r\nthe specified departure datetime and arriving to a given arrival airport not later than the specified\r\narrival datetime"
+    get:
+      parameters:
+        - name: departure
+          description: ''
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: departureDateTime
+          description: ''
+          schema:
+            format: date-time
+            type: string
+          in: query
+          required: true
+        - name: arrival
+          description: ''
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: arrivalDateTime
+          description: ''
+          schema:
+            format: date-time
+            type: string
+          in: query
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/InterconnectionsResponse'
+      operationId: getInterconnections
+components:
+  schemas:
+    LegDTO:
+      title: Root Type for LegDTO
+      description: ''
+      required:
+        - arrivalDateTime
+        - departureAirport
+        - departureDateTime
+        - arrivalAirport
+      type: object
+      properties:
+        departureAirport:
+          type: string
+          example: DUB
+        arrivalAirport:
+          type: string
+          example: STN
+        departureDateTime:
+          format: date-time
+          pattern: 'yyyy-MM-dd''T''HH:mm'
+          type: string
+          example: '2018-03-01T06:25'
+        arrivalDateTime:
+          format: date-time
+          pattern: 'yyyy-MM-dd''T''HH:mm'
+          type: string
+          example: '2018-03-01T07:35'
+      example:
+        departureAirport: DUB
+        arrivalAirport: STN
+        departureDateTime: '2018-03-01T06:25'
+        arrivalDateTime: '2018-03-01T07:35'
+    InterconnectionDTO:
+      title: Root Type for InterconnectionDTO
+      description: ''
+      required:
+        - legs
+      type: object
+      properties:
+        stops:
+          format: int32
+          type: integer
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegDTO'
+      example:
+        stops: 1
+        legs:
+          - departureAirport: DUB
+            arrivalAirport: STN
+            departureDateTime: '2018-03-01T06:25'
+            arrivalDateTime: '2018-03-01T07:35'
+          - departureAirport: STN
+            arrivalAirport: WRO
+            departureDateTime: '2018-03-01T09:50'
+            arrivalDateTime: '2018-03-01T13:20'
+  responses:
+    InterconnectionsResponse:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/InterconnectionDTO'
+          examples:
+            Interconnection example:
+              value:
+                - stops: 0
+                  legs:
+                    - departureAirport: DUB
+                      arrivalAirport: WRO
+                      departureDateTime: '2018-03-01T12:40'
+                      arrivalDateTime: '2018-03-01T16:40'
+                - stops: 1
+                  legs:
+                    - departureAirport: DUB
+                      arrivalAirport: STN
+                      departureDateTime: '2018-03-01T06:25'
+                      arrivalDateTime: '2018-03-01T07:35'
+                    - departureAirport: STN
+                      arrivalAirport: WRO
+                      departureDateTime: '2018-03-01T09:50'
+                      arrivalDateTime: '2018-03-01T13:20'
+      description: ''

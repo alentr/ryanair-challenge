@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "85dc7b7b-033e-46c3-831c-5b3023123109",
+		"name": "ryanair-challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4620078"
+	},
+	"item": [
+		{
+			"name": "Routes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services-api.ryanair.com/views/locate/3/routes",
+					"protocol": "https",
+					"host": [
+						"services-api",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"views",
+						"locate",
+						"3",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schedules",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services-api.ryanair.com/timtbl/3/schedules/{{departure}}/{{arrival}}/years/{{year}}/months/{{month}}",
+					"protocol": "https",
+					"host": [
+						"services-api",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"timtbl",
+						"3",
+						"schedules",
+						"{{departure}}",
+						"{{arrival}}",
+						"years",
+						"{{year}}",
+						"months",
+						"{{month}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interconnections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/challenge/interconnections?departure=DUB&departureDateTime=2023-08-29T02:30&arrival=AGP&arrivalDateTime=2023-08-29T22:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"challenge",
+						"interconnections"
+					],
+					"query": [
+						{
+							"key": "departure",
+							"value": "DUB"
+						},
+						{
+							"key": "departureDateTime",
+							"value": "2023-08-29T02:30"
+						},
+						{
+							"key": "arrival",
+							"value": "AGP"
+						},
+						{
+							"key": "arrivalDateTime",
+							"value": "2023-08-29T22:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "departure",
+			"value": "DUB",
+			"type": "string"
+		},
+		{
+			"key": "arrival",
+			"value": "AGP",
+			"type": "string"
+		},
+		{
+			"key": "year",
+			"value": "2023",
+			"type": "string"
+		},
+		{
+			"key": "month",
+			"value": "8",
+			"type": "string"
+		}
+	]
+}
